@@ -1,0 +1,7 @@
+Order ID,Order Date,Customer ID,Customer Name,Product Name,Category,Region,Quantity,Sales Amount,Profit
+ORD-1001,2025-01-15,CUST-01, Alice Smith ,Wireless Mouse,Electronics,North,2,$50.00 ,$15.00
+ORD-1002,2025-01-16,CUST-02,Bob Jones,Mechanical Keyboard,Electronics,South,1,$120.00,$35.00
+ORD-1003,01/17/2025,CUST-03,Charlie Brown,USB-C Hub,Electronics,East,3,$45.50,$10.00
+ORD-1004,2025-01-18,CUST-01,Alice Smith,27-inch Monitor,Hardware,West,1,$300.00,$80.00
+ORD-1005,2025-01-19,CUST-04,David Miller,Ergonomic Chair,Furniture,North,2,$400.00,$95.00
+ORD-1005,2025-01-19,CUST-04,David Miller,Ergonomic Chair,Furniture,North,2,$400.00,$95.00
