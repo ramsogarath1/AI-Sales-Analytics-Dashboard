@@ -7,6 +7,7 @@ import os
 import json
 import urllib.request
 import urllib.error
+from typing import Dict, Any, List, Optional, Tuple
 try:
     from backend.services.analytics_engine import AnalyticsEngine
     from backend.services.insights_engine import InsightsEngine
