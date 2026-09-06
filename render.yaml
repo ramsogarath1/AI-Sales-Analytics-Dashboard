@@ -1,11 +1,15 @@
+# Render Blueprint Deployment Configuration for Backend ONLY
+# Note: SQLite database storage on Render Free tier is temporary and ephemeral.
+# Container restarts or re-deployments will reset local SQLite data and uploaded files
+# unless connected to a managed database (e.g. PostgreSQL) and persistent storage bucket.
+
 services:
   - type: web
     name: ai-sales-analytics-backend
-    env: python
+    env: docker
+    dockerfilePath: ./Dockerfile
     region: singapore
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: AI_PROVIDER
         value: none
@@ -19,17 +23,3 @@ services:
         value: "25"
       - key: FRONTEND_ORIGIN
         sync: false
-
-  - type: web
-    name: ai-sales-analytics-frontend
-    env: python
-    region: singapore
-    plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
-    envVars:
-      - key: BACKEND_URL
-        fromService:
-          type: web
-          name: ai-sales-analytics-backend
-          property: host

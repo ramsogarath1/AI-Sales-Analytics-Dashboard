@@ -7,7 +7,10 @@ and generates structured statistical business insights.
 import numpy as np
 import pandas as pd
 from typing import Dict, Any, List, Optional
-from services.analytics_engine import AnalyticsEngine
+try:
+    from backend.services.analytics_engine import AnalyticsEngine
+except ImportError:
+    from services.analytics_engine import AnalyticsEngine
 
 class InsightsEngine:
 

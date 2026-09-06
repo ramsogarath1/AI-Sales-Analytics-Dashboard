@@ -1,0 +1,41 @@
+# Git and repository metadata
+.git
+.gitignore
+
+# Python virtual environments & bytecode caches
+.venv
+venv
+ENV
+env
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Environment files & secret configs
+.env
+.env.*
+
+# Local databases & uploads
+*.db
+uploads/
+
+# Testing & coverage artifacts
+.pytest_cache
+.coverage
+htmlcov
+
+# IDE & OS system files
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+
+# Build artifacts & docs
+build/
+dist/
+*.egg-info/
+Dockerfile
+.dockerignore
+README.md
