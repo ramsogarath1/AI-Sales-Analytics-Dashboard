@@ -10,6 +10,25 @@ from config import get_backend_url
 def get_auth_url() -> str:
     return f"{get_backend_url()}/api/auth"
 
+def extract_error_message(res, default_msg: str) -> str:
+    """Safely extracts human-readable error message from backend HTTP response."""
+    try:
+        payload = res.json()
+        if isinstance(payload, dict):
+            detail = payload.get("detail")
+            if isinstance(detail, dict):
+                msg = detail.get("message") or detail.get("detail")
+                if isinstance(msg, str) and msg.strip():
+                    return msg
+            elif isinstance(detail, str) and detail.strip():
+                return detail
+            msg = payload.get("message")
+            if isinstance(msg, str) and msg.strip():
+                return msg
+    except Exception:
+        pass
+    return default_msg
+
 def render_login_view():
     """Renders Login and Registration forms with session state management."""
     
@@ -56,7 +75,7 @@ def render_login_view():
                                     st.success("✅ Login successful!")
                                     st.rerun()
                                 else:
-                                    err_msg = res.json().get("detail", {}).get("message", "Invalid email or password.")
+                                    err_msg = extract_error_message(res, "Invalid email or password.")
                                     st.error(f"❌ {err_msg}")
                             except requests.exceptions.ConnectionError:
                                 st.error(f"⚠️ Backend Offline: Could not connect to FastAPI server at `{get_backend_url()}`.")
@@ -101,7 +120,7 @@ def render_login_view():
                                         st.session_state.user_id = data.get("user", {}).get("user_id")
                                         st.rerun()
                                 else:
-                                    err_msg = res.json().get("detail", {}).get("message", "Registration failed.")
+                                    err_msg = extract_error_message(res, "Registration failed.")
                                     st.error(f"❌ {err_msg}")
                             except Exception as ex:
                                 st.error(f"❌ Registration Error: {str(ex)}")
